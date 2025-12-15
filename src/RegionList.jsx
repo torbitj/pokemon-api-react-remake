@@ -6,7 +6,8 @@ const RegionList = () => {
 
   return (
     <>
-      {regions.map((region) => <Region region={region} />)}
+      <h1>Choose Your Pokémon Region</h1>
+      {regions.map((region) => <Region key={region.id} region={region} />)}
     </>
   )
 }

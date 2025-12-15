@@ -25,17 +25,20 @@ export const PokedexProvider = ({ children }) => {
     },
   ];
   
-  const getStarters = () => {
-    useEffect(() => {
-      const starters = async () => {
+
+  useEffect(() => {
+    const starters = async () => {
+      if (region.id) {
         const response = await fetch(API + region.endpoint);
         const pokeData = await response.json();
         const regionStarters = pokeData.results;
+        console.log(regionStarters);
         setStarters(regionStarters);
         setPage('starters');
       }
-    })
-  }
+    }
+    starters();
+  }, [region])
 
   const value = { regions, page, starters, setPage, setRegion }
   
