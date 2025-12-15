@@ -27,7 +27,7 @@ export const PokedexProvider = ({ children }) => {
   
 
   useEffect(() => {
-    const starters = async () => {
+    const fetchStarters = async () => {
       if (region.id) {
         const response = await fetch(API + region.endpoint);
         const pokeData = await response.json();
@@ -37,8 +37,14 @@ export const PokedexProvider = ({ children }) => {
         setPage('starters');
       }
     }
-    starters();
+    fetchStarters();
   }, [region])
+
+  // useEffect(() => {
+  //   const fetchSelectedPokemon = async () => {
+
+  //   }
+  // })
 
   const value = { regions, page, starters, setPage, setRegion }
   
