@@ -68,6 +68,16 @@ export const PokedexProvider = ({ children }) => {
     return `${name.charAt(0).toUpperCase()}${name.slice(1)}`
   }
 
+  const clearSelected = () => {
+    setSelectedPokemon({})
+    setPage('starters');
+  }
+
+  const clearRegion = () => {
+    setRegion({})
+    setPage('region')
+  }
+
   const value = {
     regions,
     page,
