@@ -53,7 +53,7 @@ export const PokedexProvider = ({ children }) => {
   //   }
   // })
 
-  const value = { regions, page, grassType, fireType, waterType, setPage, setRegion }
+  const value = { regions, page, region, grassType, fireType, waterType, setPage, setRegion }
   
   return <PokedexContext.Provider value={value}>{children}</PokedexContext.Provider>
 }
