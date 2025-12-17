@@ -1,14 +1,21 @@
 import { usePokedex } from "./PokedexContext";
 
 const SelectedPokemon = () => {
-  const { fetchedPokemon } = usePokedex();
+  const { fetchedPokemon, upperCaseName } = usePokedex();
   console.log(fetchedPokemon)
   return (
     <>
-      <h1>{fetchedPokemon.name}</h1>
-      <img src="" alt={`${fetchedPokemon.name} facing to the front`} />
+      <h1>{upperCaseName(fetchedPokemon.name)}</h1>
+      <img
+        src={fetchedPokemon.sprites.other[`official-artwork`].front_default}
+        alt={`${fetchedPokemon.name} facing to the front`}
+      />
+      {fetchedPokemon.stats.map((stat) => {
+        return <p>{upperCaseName(stat.stat.name)}: {stat.base_stat}</p>
+      })}
+      <button id="starters-back">Back to Starters</button>
     </>
-  )
+  );
 }
 
 export default SelectedPokemon;

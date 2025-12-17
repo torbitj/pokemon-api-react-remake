@@ -50,6 +50,9 @@ export const PokedexProvider = ({ children }) => {
   }, [region])
 
   useEffect(() => {
+    const init = async () => {
+      await fetchSelectedPokemon();
+    }
     const fetchSelectedPokemon = async () => {
       if (selectedPokemon.name) {
         const response = await fetch(selectedPokemon.url);
@@ -58,10 +61,25 @@ export const PokedexProvider = ({ children }) => {
         setPage('pokemon')
       }
     }
-    fetchSelectedPokemon();
+    init();
   }, [selectedPokemon])
 
-  const value = { regions, page, region, grassType, fireType, waterType, fetchedPokemon, setPage, setRegion, setSelectedPokemon }
+  const upperCaseName = (name) => {
+    return `${name.charAt(0).toUpperCase()}${name.slice(1)}`
+  }
+
+  const value = {
+    regions,
+    page,
+    region,
+    grassType,
+    fireType,
+    waterType,
+    fetchedPokemon,
+    setRegion,
+    setSelectedPokemon,
+    upperCaseName
+  }
   
   return <PokedexContext.Provider value={value}>{children}</PokedexContext.Provider>
 }
