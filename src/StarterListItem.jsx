@@ -1,6 +1,9 @@
+import { usePokedex } from "./PokedexContext";
+
 const StarterListItem = ({ starter }) => {
-  console.log(starter);
-  return <li>{starter.name}</li>
+  const { setSelectedPokemon } = usePokedex();
+  const upperCaseName = `${starter.name.charAt(0).toUpperCase()}${starter.name.slice(1)}`
+  return <li onClick={() => setSelectedPokemon(starter)}>{upperCaseName}</li>
 }
 
 export default StarterListItem;

@@ -8,6 +8,8 @@ export const PokedexProvider = ({ children }) => {
   const [grassType, setGrassType] = useState([])
   const [fireType, setFireType] = useState([]);
   const [waterType, setWaterType] = useState([]);
+  const [selectedPokemon, setSelectedPokemon] = useState({});
+  const [fetchedPokemon, setFetchedPokemon] = useState({})
   const API = `https://pokeapi.co/api/v2/pokemon`;
   const regions = [
     {
@@ -47,13 +49,19 @@ export const PokedexProvider = ({ children }) => {
     fetchStarters();
   }, [region])
 
-  // useEffect(() => {
-  //   const fetchSelectedPokemon = async () => {
+  useEffect(() => {
+    const fetchSelectedPokemon = async () => {
+      if (selectedPokemon.name) {
+        const response = await fetch(selectedPokemon.url);
+        const pokemonData = await response.json();
+        setFetchedPokemon(pokemonData);
+        setPage('pokemon')
+      }
+    }
+    fetchSelectedPokemon();
+  }, [selectedPokemon])
 
-  //   }
-  // })
-
-  const value = { regions, page, region, grassType, fireType, waterType, setPage, setRegion }
+  const value = { regions, page, region, grassType, fireType, waterType, fetchedPokemon, setPage, setRegion, setSelectedPokemon }
   
   return <PokedexContext.Provider value={value}>{children}</PokedexContext.Provider>
 }
