@@ -1,7 +1,7 @@
 import { usePokedex } from "./PokedexContext";
 
 const SelectedPokemon = () => {
-  const { fetchedPokemon, upperCaseName } = usePokedex();
+  const { fetchedPokemon, upperCaseName, clearSelected } = usePokedex();
   console.log(fetchedPokemon)
   return (
     <>
@@ -13,7 +13,7 @@ const SelectedPokemon = () => {
       {fetchedPokemon.stats.map((stat) => {
         return <p>{upperCaseName(stat.stat.name)}: {stat.base_stat}</p>
       })}
-      <button id="starters-back">Back to Starters</button>
+      <button onClick={clearSelected}>Back to Starters</button>
     </>
   );
 }

@@ -88,6 +88,8 @@ export const PokedexProvider = ({ children }) => {
     fetchedPokemon,
     setRegion,
     setSelectedPokemon,
+    clearRegion,
+    clearSelected,
     upperCaseName
   }
   

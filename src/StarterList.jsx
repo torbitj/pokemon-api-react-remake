@@ -2,7 +2,7 @@ import { usePokedex } from "./PokedexContext";
 import StarterListItem from "./StarterListItem"
 
 const StarterList = () => {
-  const { grassType, fireType, waterType, region } = usePokedex();
+  const { grassType, fireType, waterType, region, clearRegion } = usePokedex();
   console.log(region);
   return (
     <>
@@ -25,6 +25,7 @@ const StarterList = () => {
           {waterType.map((starter) => <StarterListItem key={starter.url} starter={starter} />)}
         </ul>
       </figure>
+      <button onClick={clearRegion}>Back to Regions</button>
     </>
   )
 }
