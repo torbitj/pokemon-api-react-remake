@@ -5,7 +5,9 @@ const PokedexContext = createContext();
 export const PokedexProvider = ({ children }) => {
   const [region, setRegion] = useState({});
   const [page, setPage] = useState('region');
-  const [starters, setStarters] = useState([])
+  const [grassType, setGrassType] = useState([])
+  const [fireType, setFireType] = useState([]);
+  const [waterType, setWaterType] = useState([]);
   const API = `https://pokeapi.co/api/v2/pokemon`;
   const regions = [
     {
@@ -24,6 +26,12 @@ export const PokedexProvider = ({ children }) => {
       endpoint: `?offset=251&limit=9`,
     },
   ];
+
+  const setTypes = (starters) => {
+    setGrassType(starters.slice(0, 3))
+    setFireType(starters.slice(3, 6))
+    setWaterType(starters.slice(6, 9))
+  }
   
 
   useEffect(() => {
@@ -32,8 +40,7 @@ export const PokedexProvider = ({ children }) => {
         const response = await fetch(API + region.endpoint);
         const pokeData = await response.json();
         const regionStarters = pokeData.results;
-        console.log(regionStarters);
-        setStarters(regionStarters);
+        setTypes(regionStarters);
         setPage('starters');
       }
     }
@@ -46,7 +53,7 @@ export const PokedexProvider = ({ children }) => {
   //   }
   // })
 
-  const value = { regions, page, starters, setPage, setRegion }
+  const value = { regions, page, grassType, fireType, waterType, setPage, setRegion }
   
   return <PokedexContext.Provider value={value}>{children}</PokedexContext.Provider>
 }
